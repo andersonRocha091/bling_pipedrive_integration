@@ -1,7 +1,7 @@
 const Mongoose = require("mongoose");
 const revenueSchema = new Mongoose.Schema({
   value: {
-    type: Integer,
+    type: Number,
     required: true,
   },
   year: {

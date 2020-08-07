@@ -44,14 +44,15 @@ class HeroRoutes extends BaseRoute {
 
   create() {
     return {
-      path: "/heroes",
+      path: "/revenues",
       method: "POST",
       options: {
         validate: {
           failAction,
           payload: joi.object({
-            nome: joi.string().required().min(3).max(100),
-            poder: joi.string().required().min(2).max(100),
+            event: joi.string().required(),
+            current: joi.object().required(),
+            meta: joi.object().required(),
           }),
           headers,
         },
@@ -61,7 +62,7 @@ class HeroRoutes extends BaseRoute {
           const { nome, poder } = request.payload;
           const result = await this.db.create({ nome, poder });
           return {
-            message: "Hero inserted successfully",
+            message: "Revenue inserted successfully",
             _id: result._id,
           };
         } catch (error) {
@@ -73,7 +74,7 @@ class HeroRoutes extends BaseRoute {
 
   update() {
     return {
-      path: "/heroes/{id}",
+      path: "/revenues/{id}",
       method: "PATCH",
       options: {
         validate: {
@@ -99,7 +100,7 @@ class HeroRoutes extends BaseRoute {
           if (result.nModified !== 1)
             return boom.preconditionFailed("Cant update hero");
           return {
-            message: "Hero updated successfully",
+            message: "Revenue updated successfully",
           };
         } catch (error) {
           return boom.internal();
@@ -110,7 +111,7 @@ class HeroRoutes extends BaseRoute {
 
   delete() {
     return {
-      path: "/heroes/{id}",
+      path: "/revenues/{id}",
       method: "DELETE",
       options: {
         validate: {
@@ -130,7 +131,7 @@ class HeroRoutes extends BaseRoute {
           }
 
           return {
-            message: "Hero removed successfully",
+            message: "Revenue removed successfully",
           };
         } catch (error) {
           return boom.internal();
