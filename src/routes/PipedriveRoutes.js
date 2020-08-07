@@ -27,14 +27,20 @@ class PipedriveRoutes extends BaseRoute {
           query: joi.object({
             skip: joi.number().integer().default(0),
             limit: joi.number().integer().default(10),
+            status: joi.string().default("all_not_deleted"),
           }),
         },
       },
-      handler: (request, headers) => {
+      handler: async (request) => {
         try {
-          const { skip, limit } = request.query;
-
-          return this.db.read(name ? query : {}, skip, limit);
+          const { status } = request.query;
+          const { data } = await axios.get(
+            `${process.env.PIPEDRIVE_API_URL}?status=${status}&start=0&api_token=${process.env.PIPEDRIVE_TOKEN}`
+          );
+          return {
+            message: "Deals inserted successfully",
+            ...data,
+          };
         } catch (error) {
           return boom.internal();
         }

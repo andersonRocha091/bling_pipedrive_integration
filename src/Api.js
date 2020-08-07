@@ -22,6 +22,7 @@ const Context = require("./db/strategies/base/ContextStrategy");
 const MongoDB = require("./db/strategies/mongodb/MongoDB");
 const Schema = require("./db/strategies/mongodb/schemes/RevenueSchema");
 const RevenueRoutes = require("./routes/RevenueRoutes");
+const PipedriveRoutes = require("./routes/PipedriveRoutes");
 const UtilRoute = require("./routes/UtilRoutes");
 
 const app = new Hapi.Server({
@@ -73,6 +74,7 @@ async function main() {
   //   ...mapRoutes(new UtilRoute(), UtilRoute.methods()),
   // ]);
   app.route([
+    ...mapRoutes(new PipedriveRoutes(context), PipedriveRoutes.methods()),
     ...mapRoutes(new RevenueRoutes(context), RevenueRoutes.methods()),
     ...mapRoutes(new UtilRoute(), UtilRoute.methods()),
   ]);
