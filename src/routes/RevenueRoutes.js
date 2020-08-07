@@ -6,11 +6,11 @@ const failAction = (request, headers, erro) => {
   throw erro;
 };
 
-const headers = joi
-  .object({
-    authorization: joi.string().required(),
-  })
-  .unknown();
+// const headers = joi
+//   .object({
+//     authorization: joi.string().required(),
+//   })
+//   .unknown();
 class HeroRoutes extends BaseRoute {
   constructor(db) {
     super();
@@ -18,7 +18,7 @@ class HeroRoutes extends BaseRoute {
   }
   list() {
     return {
-      path: "/heroes",
+      path: "/revenues",
       method: "GET",
       options: {
         validate: {
@@ -28,7 +28,6 @@ class HeroRoutes extends BaseRoute {
             limit: joi.number().integer().default(10),
             name: joi.string().min(3).max(100),
           }),
-          headers,
         },
       },
       handler: (request, headers) => {
@@ -57,7 +56,7 @@ class HeroRoutes extends BaseRoute {
           headers,
         },
       },
-      handler: async request => {
+      handler: async (request) => {
         try {
           const { nome, poder } = request.payload;
           const result = await this.db.create({ nome, poder });
@@ -89,7 +88,7 @@ class HeroRoutes extends BaseRoute {
           headers,
         },
       },
-      handler: async request => {
+      handler: async (request) => {
         try {
           const { id } = request.params;
           const { payload } = request;
@@ -122,7 +121,7 @@ class HeroRoutes extends BaseRoute {
           headers,
         },
       },
-      handler: async request => {
+      handler: async (request) => {
         try {
           const { id } = request.params;
           const result = await this.db.delete(id);
