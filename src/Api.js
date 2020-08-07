@@ -22,7 +22,6 @@ const Context = require("./db/strategies/base/ContextStrategy");
 const MongoDB = require("./db/strategies/mongodb/MongoDB");
 const Schema = require("./db/strategies/mongodb/schemes/HeroesSchema");
 const HeroesRoute = require("./routes/HeroRoutes");
-const AuthRoute = require("./routes/AuthRoutes");
 const UtilRoute = require("./routes/UtilRoutes");
 // const Postgres = require("./db/strategies/postgres/Postgres");
 // const UserSchema = require("./db/strategies/postgres/schemas/UserSchemaPg");
