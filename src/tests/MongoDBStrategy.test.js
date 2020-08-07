@@ -37,8 +37,13 @@ describe("MongoDB test suit", function () {
   });
 
   it("MongoDB inserting new item", async () => {
-    const { nome, poder } = await context.create(MOCK_REVENUE_INSERT);
-    assert.deepEqual({ nome, poder }, MOCK_REVENUE_INSERT);
+    const { value, description, year, month, day } = await context.create(
+      MOCK_REVENUE_INSERT
+    );
+    assert.deepEqual(
+      { value, description, year, month, day },
+      MOCK_REVENUE_INSERT
+    );
   });
 
   it("Listing item", async () => {
