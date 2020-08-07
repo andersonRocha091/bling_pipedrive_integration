@@ -9,7 +9,7 @@ class PipedriveService {
   }
 
   getAllPipeDriveWonDeals() {
-    let page = 0;
+    let page = this.start;
     let res = this.getDeals(page, this.limit, this.status);
     while (res.hasMoreWonDeals) {
       res = this.getDeals(page, this.limit, this.status);
