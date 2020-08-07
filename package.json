@@ -1,0 +1,48 @@
+{
+  "name": "07",
+  "version": "1.0.0",
+  "description": "Multi data sourcing is an scaffolding project which aims to provide an initial setup to built applications which gonna consume data from mongo and SQL databases",
+  "main": "index.js",
+  "scripts": {
+    "preinstall": "npm i -g pm2",
+    "postinstall": "cross-env NODE_ENV=prod npm t ",
+    "test": "nyc --reporter=html mocha --timeout 20000 --exit src/tests/*.js",
+    "test:watch": "nyc mocha src/tests/*.js -w",
+    "test:prod": "cross-env NODE_ENV=prod npm t",
+    "prod": "cross-env NODE_ENV=prod pm2-runtime src/Api.js",
+    "dev": "cross-env NODE_ENV=dev pm2-runtime src/Api.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/andersonRocha091/multidatasource-scaffold.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/andersonRocha091/multidatasource-scaffold/issues"
+  },
+  "homepage": "https://github.com/andersonRocha091/multidatasource-scaffold#readme",
+  "dependencies": {
+    "@hapi/hapi": "^19.1.1",
+    "@hapi/inert": "^6.0.1",
+    "@hapi/joi": "^17.1.1",
+    "@hapi/vision": "^6.0.0",
+    "bcrypt": "^4.0.1",
+    "boom": "^7.3.0",
+    "cross-env": "^7.0.2",
+    "dotenv": "^8.2.0",
+    "hapi-auth-jwt2": "^10.1.0",
+    "hapi-swagger": "^13.0.2",
+    "jsonwebtoken": "^8.5.1",
+    "mongoose": "^5.9.16",
+    "pg": "^8.2.1",
+    "pg-hstore": "^2.3.3",
+    "pm2": "^4.4.0",
+    "sequelize": "^5.21.10"
+  },
+  "devDependencies": {
+    "mocha": "^7.2.0",
+    "nyc": "^15.1.0"
+  }
+}
