@@ -1,61 +1,70 @@
 const assert = require("assert");
 const MongoDB = require("../db/strategies/mongodb/MongoDB");
-const HeroesSchema = require("../db/strategies/mongodb/schemes/HeroesSchema");
+const RevenueSchema = require("../db/strategies/mongodb/schemes/RevenueSchema");
 const Context = require("../db/strategies/base/ContextStrategy");
 
 let context = {};
-const MOCK_HEROI_CADASTRAR = {
-  nome: "Batman",
-  poder: "Dinheiro",
+const MOCK_REVENUE_INSERT = {
+  value: 100,
+  description: "First ever revenue",
+  year: "2020",
+  month: "08",
+  day: "05",
 };
-const MOCK_HEROI_ATUALIZAR = {
-  nome: `Patolino-${Date.now()}`,
-  poder: "Velocidade",
+const MOCK_REVENUE_UPDATE = {
+  value: 150,
+  description: `Revenue updated-${Date.now()}`,
+  year: "2020",
+  month: "08",
+  day: "05",
 };
-let MOCK_HEROI_ATUALIZAR_ID = "";
+let MOCK_REVENUE_UPDATE_ID = "";
 describe("MongoDB test suit", function () {
   this.timeout(15000);
 
   this.beforeAll(async () => {
     const connection = MongoDB.connect();
-    context = new Context(new MongoDB(connection, HeroesSchema));
+    context = new Context(new MongoDB(connection, RevenueSchema));
   });
 
   it("MongoDB Connection", async () => {
     const result = await context.isConnected();
     const expected = "Connected";
-    const { _id } = await context.create(MOCK_HEROI_ATUALIZAR);
-    MOCK_HEROI_ATUALIZAR_ID = _id;
+    const { _id } = await context.create(MOCK_REVENUE_UPDATE);
+    MOCK_REVENUE_UPDATE_ID = _id;
 
     assert.deepEqual(result, expected);
   });
 
   it("MongoDB inserting new item", async () => {
-    const { nome, poder } = await context.create(MOCK_HEROI_CADASTRAR);
-    assert.deepEqual({ nome, poder }, MOCK_HEROI_CADASTRAR);
+    const { nome, poder } = await context.create(MOCK_REVENUE_INSERT);
+    assert.deepEqual({ nome, poder }, MOCK_REVENUE_INSERT);
   });
 
   it("Listing item", async () => {
-    const [{ nome, poder }] = await context.read(
+    const [{ value, description, year, month, day }] = await context.read(
       {
-        nome: MOCK_HEROI_CADASTRAR.nome,
+        description: MOCK_REVENUE_INSERT.description,
       },
       0,
       10
     );
 
-    assert.deepEqual({ nome, poder }, MOCK_HEROI_CADASTRAR);
+    assert.deepEqual(
+      { value, description, year, month, day },
+      MOCK_REVENUE_INSERT
+    );
   });
 
-  it("Update a Hero", async () => {
-    const result = await context.update(MOCK_HEROI_ATUALIZAR_ID, {
-      nome: "Pernalonga",
+  it("Updating a revenue", async () => {
+    const result = await context.update(MOCK_REVENUE_UPDATE_ID, {
+      description: "Revenue to be updated",
     });
     assert.deepEqual(result.nModified, 1);
   });
 
-  it("Remove hero", async () => {
-    const result = await context.delete(MOCK_HEROI_ATUALIZAR_ID);
+  it("Remove revenue", async () => {
+    const result = await context.delete(MOCK_REVENUE_UPDATE_ID);
     assert.deepEqual(result.n, 1);
   });
 });

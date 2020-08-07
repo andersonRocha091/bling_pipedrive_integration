@@ -4,6 +4,10 @@ const revenueSchema = new Mongoose.Schema({
     type: Number,
     required: true,
   },
+  description: {
+    type: String,
+    required: true,
+  },
   year: {
     type: String,
     required: true,
