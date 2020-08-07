@@ -8,14 +8,33 @@ class PipedriveService {
       (this.db = db);
   }
 
-  async getDeals(page, limit, status) {
-    const { data, additional_data } = await axios.get(
-      `${process.env.PIPEDRIVE_API_URL}?status=${status}&start=${page}&limit=${limit}&api_token=${process.env.PIPEDRIVE_TOKEN}`
-    );
+  getAllPipeDriveWonDeals() {
+    let page = 0;
+    let res = this.getDeals(page, this.limit, this.status);
+    while (res.hasMoreWonDeals) {
+      res = this.getDeals(page, this.limit, this.status);
+      page++;
+    }
   }
 
-  async insertNewRevenue({ id, title, value, update_time, status }) {
+  async getDeals(page, limit, status) {
+    const {
+      data,
+      additional_data: { more_itens_in_collection },
+    } = await axios.get(
+      `${process.env.PIPEDRIVE_API_URL}?status=${status}&start=${page}&limit=${limit}&api_token=${process.env.PIPEDRIVE_TOKEN}`
+    );
+    let promises = [];
+    data.forEach((deal) => {
+      promises.push(this.insertNewRevenue({ ...deal }));
+    });
+    result = await Promise.all(promises);
+    return { more_itens_in_collection, result };
+  }
+
+  insertNewRevenue({ id, title, value, update_time, status }) {
     let wonDate = new Date(update_time);
+    const filter = { pipedriveId: id };
     let revenue = {
       pipedriveId: id,
       description: title,
@@ -25,6 +44,11 @@ class PipedriveService {
       month: wonDate.getMonth() + 1,
       day: wonDate.getDate(),
     };
+    return this.db.findOneAndUpdate(filter, revenue, {
+      new: true,
+      upsert: true,
+      rawResult: true,
+    });
   }
 }
 
