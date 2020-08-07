@@ -28,7 +28,7 @@ describe("Api Test Suit", function () {
   it("Must get all deals from pipedrive GET - /deals", async () => {
     const result = await app.inject({
       method: "GET",
-      url: "/deals?skip=0&limit=10",
+      url: "/deals?start=0&limit=10",
     });
     const { success } = JSON.parse(result.payload);
     assert.ok(success === true);
