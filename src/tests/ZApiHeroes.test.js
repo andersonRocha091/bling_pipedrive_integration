@@ -31,6 +31,7 @@ describe("Api Test Suit", function () {
       url: "/deals?start=0&limit=10",
     });
     const { success } = JSON.parse(result.payload);
+
     assert.ok(success === true);
   });
 

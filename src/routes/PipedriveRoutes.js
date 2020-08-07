@@ -37,6 +37,7 @@ class PipedriveRoutes extends BaseRoute {
           const { data } = await axios.get(
             `${process.env.PIPEDRIVE_API_URL}?status=${status}&start=${start}&limit=${limit}&api_token=${process.env.PIPEDRIVE_TOKEN}`
           );
+          console.log(data);
           return {
             message: "Deals inserted successfully",
             ...data,
