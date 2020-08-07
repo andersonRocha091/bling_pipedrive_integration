@@ -59,8 +59,14 @@ class HeroRoutes extends BaseRoute {
       },
       handler: async (request) => {
         try {
-          const { nome, poder } = request.payload;
-          const result = await this.db.create({ nome, poder });
+          const { value, description, year, month, day } = request.payload;
+          const result = await this.db.create({
+            value,
+            description,
+            year,
+            month,
+            day,
+          });
           return {
             message: "Revenue inserted successfully",
             _id: result._id,

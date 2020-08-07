@@ -3,25 +3,40 @@ const api = require("../Api");
 
 let app = {};
 const MOCK_HERO_CADASTRAR = {
-  nome: "Chapolin Colorado",
-  poder: "Marreta Bionica",
+  value: 235,
+  description: "1st revenue from test",
 };
 
 const MOCK_HERO_INITIAL = {
   nome: "Gavião arqueiro",
   poder: "mira",
 };
-const TOKEN =
-  "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6IkxleEx1dGhvciIsImlkIjoxLCJpYXQiOjE1OTEzMTgxNDR9.10qS7Bt-tt0KR3aogMPdoAGl_dd-3KPuR0TA0DyvqY8";
-let MOCK_ID = "";
-const headers = {
-  Authorization: TOKEN,
-};
+// const TOKEN =
+//   "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6IkxleEx1dGhvciIsImlkIjoxLCJpYXQiOjE1OTEzMTgxNDR9.10qS7Bt-tt0KR3aogMPdoAGl_dd-3KPuR0TA0DyvqY8";
+// let MOCK_ID = "";
+// const headers = {
+//   Authorization: TOKEN,
+// };
 
 describe("Api Test Suit", function () {
   it("Must return true", () => {
     assert.deepEqual(true, true);
   });
+
+  it("Cadastrar POST - /Revenues", async () => {
+    const result = await app.inject({
+      method: "POST",
+      url: "/revenues",
+      payload: MOCK_HERO_CADASTRAR,
+      headers,
+    });
+    const statusCode = result.statusCode;
+    const { message, _id } = JSON.parse(result.payload);
+    assert.ok(statusCode === 200);
+    assert.notStrictEqual(_id, undefined);
+    assert.deepEqual(message, "Revenue inserted successfully");
+  });
+
   // this.beforeAll(async () => {
   //   app = await api;
   //   const result = await app.inject({
