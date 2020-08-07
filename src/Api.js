@@ -23,9 +23,6 @@ const MongoDB = require("./db/strategies/mongodb/MongoDB");
 const Schema = require("./db/strategies/mongodb/schemes/HeroesSchema");
 const HeroesRoute = require("./routes/HeroRoutes");
 const UtilRoute = require("./routes/UtilRoutes");
-// const Postgres = require("./db/strategies/postgres/Postgres");
-// const UserSchema = require("./db/strategies/postgres/schemas/UserSchemaPg");
-const JWT_SECRET = process.env.JWT_KEY;
 
 const app = new Hapi.Server({
   port: process.env.PORT,
@@ -39,11 +36,7 @@ async function main() {
   const connection = MongoDB.connect();
   const context = new Context(new MongoDB(connection, Schema));
 
-  // const pgConnection = await Postgres.connect();
-  // const userModel = await Postgres.defineModel(pgConnection, UserSchema);
-  // const contextPostgres = new Context(new Postgres(pgConnection, userModel));
-
-  await app.register([HapiJwt, Inert, Vision]);
+  await app.register([Inert, Vision]);
 
   //Creating auth strategy
   // app.auth.strategy("jwt", "jwt", {
