@@ -2,15 +2,171 @@ const assert = require("assert");
 const api = require("../Api");
 
 let app = {};
-const MOCK_HERO_CADASTRAR = {
-  value: 235,
-  description: "1st revenue from test",
+const apiToken = "65e2b65ba5cd1c7be5e84d7dcbd215a64b3b3d99";
+let pipeDriveUrl = `https://api.pipedrive.com/v1/deals?status=all_not_deleted&start=0&api_token=${apiToken}`;
+// const MOCK_DEAL_WEBHOOK_UPDATE = {
+//   value: 235,
+//   description: "1st revenue from test",
+// };
+
+const MOCK_DEAL_LIST = {
+  success: true,
+  data: [
+    {
+      id: 1,
+      creator_user_id: {
+        id: 11659859,
+        name: "Anderson Rocha",
+        email: "andersonecomp09.1@gmail.com",
+        has_pic: 0,
+        pic_hash: null,
+        active_flag: true,
+        value: 11659859,
+      },
+      user_id: {
+        id: 11659859,
+        name: "Anderson Rocha",
+        email: "andersonecomp09.1@gmail.com",
+        has_pic: 0,
+        pic_hash: null,
+        active_flag: true,
+        value: 11659859,
+      },
+      person_id: {
+        active_flag: true,
+        name: "Italo Silva",
+        email: [
+          {
+            value: "",
+            primary: true,
+          },
+        ],
+        phone: [
+          {
+            value: "",
+            primary: true,
+          },
+        ],
+        value: 1,
+      },
+      org_id: {
+        name: "Otto Tech",
+        people_count: 1,
+        owner_id: 11659859,
+        address: null,
+        active_flag: true,
+        cc_email: "andersons@pipedrivemail.com",
+        value: 1,
+      },
+      stage_id: 1,
+      title: "Italo Silva deal",
+      value: 500,
+      currency: "USD",
+      add_time: "2020-08-06 23:21:09",
+      update_time: "2020-08-06 23:26:03",
+      stage_change_time: "2020-08-06 23:25:41",
+      active: true,
+      deleted: false,
+      status: "open",
+      probability: null,
+      next_activity_date: null,
+      next_activity_time: null,
+      next_activity_id: null,
+      last_activity_id: null,
+      last_activity_date: null,
+      lost_reason: null,
+      visible_to: "3",
+      close_time: null,
+      pipeline_id: 1,
+      won_time: null,
+      first_won_time: null,
+      lost_time: null,
+      products_count: 1,
+      files_count: 0,
+      notes_count: 0,
+      followers_count: 1,
+      email_messages_count: 0,
+      activities_count: 0,
+      done_activities_count: 0,
+      undone_activities_count: 0,
+      participants_count: 1,
+      expected_close_date: null,
+      last_incoming_mail_time: null,
+      last_outgoing_mail_time: null,
+      label: null,
+      stage_order_nr: 0,
+      person_name: "Italo Silva",
+      org_name: "Otto Tech",
+      next_activity_subject: null,
+      next_activity_type: null,
+      next_activity_duration: null,
+      next_activity_note: null,
+      formatted_value: "US$500",
+      weighted_value: 500,
+      formatted_weighted_value: "US$500",
+      weighted_value_currency: "USD",
+      rotten_time: null,
+      owner_name: "Anderson Rocha",
+      cc_email: "andersons+deal1@pipedrivemail.com",
+      org_hidden: false,
+      person_hidden: false,
+    },
+  ],
+  additional_data: {
+    pagination: {
+      start: 0,
+      limit: 100,
+      more_items_in_collection: false,
+    },
+  },
+  related_objects: {
+    user: {
+      "11659859": {
+        id: 11659859,
+        name: "Anderson Rocha",
+        email: "andersonecomp09.1@gmail.com",
+        has_pic: 0,
+        pic_hash: null,
+        active_flag: true,
+      },
+    },
+    organization: {
+      "1": {
+        id: 1,
+        name: "Otto Tech",
+        people_count: 1,
+        owner_id: 11659859,
+        address: null,
+        active_flag: true,
+        cc_email: "andersons@pipedrivemail.com",
+      },
+    },
+    person: {
+      "1": {
+        active_flag: true,
+        id: 1,
+        name: "Italo Silva",
+        email: [
+          {
+            value: "",
+            primary: true,
+          },
+        ],
+        phone: [
+          {
+            value: "",
+            primary: true,
+          },
+        ],
+      },
+    },
+  },
 };
 
-const MOCK_HERO_INITIAL = {
-  nome: "Gavião arqueiro",
-  poder: "mira",
-};
+// const MOCK_HERO_INITIAL = {
+//   nome: "Gavião arqueiro",
+//   poder: "mira",
+// };
 // const TOKEN =
 //   "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6IkxleEx1dGhvciIsImlkIjoxLCJpYXQiOjE1OTEzMTgxNDR9.10qS7Bt-tt0KR3aogMPdoAGl_dd-3KPuR0TA0DyvqY8";
 // let MOCK_ID = "";
@@ -27,8 +183,8 @@ describe("Api Test Suit", function () {
     const result = await app.inject({
       method: "POST",
       url: "/revenues",
-      payload: MOCK_HERO_CADASTRAR,
-      headers,
+      payload: MOCK_DEAL_WEBHOOK_UPDATE,
+      // headers,
     });
     const statusCode = result.statusCode;
     const { message, _id } = JSON.parse(result.payload);

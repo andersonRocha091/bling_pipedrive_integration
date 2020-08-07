@@ -6,12 +6,12 @@ const failAction = (request, headers, erro) => {
   throw erro;
 };
 
-// const headers = joi
-//   .object({
-//     authorization: joi.string().required(),
-//   })
-//   .unknown();
-class HeroRoutes extends BaseRoute {
+const headers = joi
+  .object({
+    authorization: joi.string().required(),
+  })
+  .unknown();
+class RevenueRoutes extends BaseRoute {
   constructor(db) {
     super();
     this.db = db;
@@ -26,7 +26,6 @@ class HeroRoutes extends BaseRoute {
           query: joi.object({
             skip: joi.number().integer().default(0),
             limit: joi.number().integer().default(10),
-            name: joi.string().min(3).max(100),
           }),
         },
       },
@@ -50,23 +49,23 @@ class HeroRoutes extends BaseRoute {
         validate: {
           failAction,
           payload: joi.object({
-            event: joi.string().required(),
-            current: joi.object().required(),
-            meta: joi.object().required(),
+            success: joi.boolean().equal(true),
+            data: joi.array(),
           }),
-          headers,
+          // headers,
         },
       },
       handler: async (request) => {
         try {
-          const { value, description, year, month, day } = request.payload;
-          const result = await this.db.create({
-            value,
-            description,
-            year,
-            month,
-            day,
-          });
+          const { data } = request.payload;
+          console.log(data);
+          // const result = await this.db.create({
+          //   value,
+          //   description,
+          //   year,
+          //   month,
+          //   day,
+          // });
           return {
             message: "Revenue inserted successfully",
             _id: result._id,
@@ -147,4 +146,4 @@ class HeroRoutes extends BaseRoute {
   }
 }
 
-module.exports = HeroRoutes;
+module.exports = RevenueRoutes;
