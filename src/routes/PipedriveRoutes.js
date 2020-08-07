@@ -25,7 +25,7 @@ class PipedriveRoutes extends BaseRoute {
         validate: {
           failAction,
           query: joi.object({
-            skip: joi.number().integer().default(0),
+            start: joi.number().integer().default(0),
             limit: joi.number().integer().default(10),
             status: joi.string().default("all_not_deleted"),
           }),
