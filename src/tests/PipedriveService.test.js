@@ -71,7 +71,9 @@ describe("Testing pipedrive services integration", function () {
     );
     assert.ok(result.length > 0);
   });
-
+  /**
+   * It must have more than one item saved into pipedrive account
+   */
   it(`Getting all deals per expected number of pages from status: ${settings.status}`, async () => {
     const expectedPageNumber = 1;
     const { page } = await pipedriveService.getAllPipeDriveDeals();
