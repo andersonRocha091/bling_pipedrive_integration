@@ -36,15 +36,15 @@ class PipedriveService {
     if (data.success && data.data.length > 0) {
       let promises = [];
       let result = [];
-      const more_itens_in_collection =
+      const more_items_in_collection =
         data.additional_data.pagination.more_items_in_collection;
       data.data.forEach((deal) => {
         promises.push(this.insertNewRevenue({ ...deal }));
       });
       result = await Promise.all(promises);
-      return { more_itens_in_collection: more_itens_in_collection, result };
+      return { more_items_in_collection, result };
     }
-    return { more_itens_in_collection: false, result };
+    return { more_items_in_collection: false, result };
   }
 
   async getAllPipeDriveDeals() {
@@ -54,9 +54,9 @@ class PipedriveService {
     allDeals = allDeals.concat(response.result);
 
     while (response.more_items_in_collection === true) {
+      page++;
       response = await this.getDeals(page, this._limit, this._status);
       allDeals = allDeals.concat(response.result);
-      page++;
     }
 
     return { page, results: allDeals };

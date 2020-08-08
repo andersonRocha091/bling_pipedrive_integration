@@ -13,7 +13,7 @@ const MOCK_REVENUE_INSERT = {
 };
 const settings = {
   start: 0,
-  limit: 10,
+  limit: 1,
   status: "all_not_deleted",
 };
 
@@ -73,7 +73,8 @@ describe("Testing pipedrive services integration", function () {
   });
 
   it(`Getting all deals per expected number of pages from status: ${settings.status}`, async () => {
+    const expectedPageNumber = 1;
     const { page } = await pipedriveService.getAllPipeDriveDeals();
-    assert.ok(page >= 0);
+    assert.equal(page, expectedPageNumber);
   });
 });
