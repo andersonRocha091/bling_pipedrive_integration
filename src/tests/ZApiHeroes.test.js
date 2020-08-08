@@ -25,14 +25,19 @@ describe("Api Test Suit", function () {
     assert.deepEqual(true, true);
   });
 
-  it("Must get all deals from pipedrive GET - /deals", async () => {
+  it("Must import all deals from pipedrive POST - /deals", async () => {
     const result = await app.inject({
-      method: "GET",
+      method: "POST",
       url: "/deals?start=0&limit=10",
+      payload: {
+        start: 0,
+        limit: 10,
+        status: "all_not_deleted",
+      },
     });
-    const { success } = JSON.parse(result.payload);
+    const { results } = JSON.parse(result.payload);
 
-    assert.ok(success === true);
+    assert.ok(results);
   });
 
   // this.beforeAll(async () => {
