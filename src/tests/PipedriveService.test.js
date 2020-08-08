@@ -71,4 +71,9 @@ describe("Testing pipedrive services integration", function () {
     );
     assert.ok(result.length > 0);
   });
+
+  it(`Getting all deals per expected number of pages from status: ${settings.status}`, async () => {
+    const { page } = await pipedriveService.getAllPipeDriveDeals();
+    assert.ok(page >= 0);
+  });
 });
