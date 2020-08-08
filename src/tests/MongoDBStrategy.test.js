@@ -6,6 +6,7 @@ const Context = require("../db/strategies/base/ContextStrategy");
 let context = {};
 const MOCK_REVENUE_INSERT = {
   value: 100,
+  pipedriveId: "5",
   description: "First ever revenue",
   year: "2020",
   month: "08",
@@ -13,6 +14,7 @@ const MOCK_REVENUE_INSERT = {
 };
 const MOCK_REVENUE_UPDATE = {
   value: 150,
+  pipedriveId: "4",
   description: `Revenue updated-${Date.now()}`,
   year: "2020",
   month: "08",
@@ -37,17 +39,24 @@ describe("MongoDB test suit", function () {
   });
 
   it("MongoDB inserting new item", async () => {
-    const { value, description, year, month, day } = await context.create(
-      MOCK_REVENUE_INSERT
-    );
+    const {
+      value,
+      pipedriveId,
+      description,
+      year,
+      month,
+      day,
+    } = await context.create(MOCK_REVENUE_INSERT);
     assert.deepEqual(
-      { value, description, year, month, day },
+      { value, pipedriveId, description, year, month, day },
       MOCK_REVENUE_INSERT
     );
   });
 
   it("Listing item", async () => {
-    const [{ value, description, year, month, day }] = await context.read(
+    const [
+      { value, pipedriveId, description, year, month, day },
+    ] = await context.read(
       {
         description: MOCK_REVENUE_INSERT.description,
       },
@@ -56,7 +65,7 @@ describe("MongoDB test suit", function () {
     );
 
     assert.deepEqual(
-      { value, description, year, month, day },
+      { value, pipedriveId, description, year, month, day },
       MOCK_REVENUE_INSERT
     );
   });
