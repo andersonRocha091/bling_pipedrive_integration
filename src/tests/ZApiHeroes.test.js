@@ -2,8 +2,6 @@ const assert = require("assert");
 const api = require("../Api");
 
 let app = {};
-const apiToken = "65e2b65ba5cd1c7be5e84d7dcbd215a64b3b3d99";
-let pipeDriveUrl = `https://api.pipedrive.com/v1/deals?status=all_not_deleted&start=0&api_token=${apiToken}`;
 
 // const MOCK_HERO_INITIAL = {
 //   nome: "Gavião arqueiro",
@@ -19,10 +17,6 @@ let pipeDriveUrl = `https://api.pipedrive.com/v1/deals?status=all_not_deleted&st
 describe("Api Test Suit", function () {
   this.beforeAll(async () => {
     app = await api;
-  });
-
-  it("Must return true", () => {
-    assert.deepEqual(true, true);
   });
 
   it("Must import all deals from pipedrive POST - /deals", async () => {
