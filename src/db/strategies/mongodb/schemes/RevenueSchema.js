@@ -11,6 +11,7 @@ const revenueSchema = new Mongoose.Schema({
   pipedriveId: {
     type: Number,
     required: true,
+    unique: true,
   },
   year: {
     type: String,
