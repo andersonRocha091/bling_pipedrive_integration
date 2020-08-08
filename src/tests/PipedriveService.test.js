@@ -50,6 +50,25 @@ describe("Testing pipedrive services integration", function () {
       ...MOCK_REVENUE_INSERT,
     });
 
-    assert.deepEqual(true, true);
+    assert.deepEqual(
+      {
+        pipedriveId,
+        description,
+        value,
+        year,
+        month,
+        day,
+      },
+      expected
+    );
+  });
+
+  it(`Getting deals from status: ${settings.status}`, async () => {
+    const { result } = await pipedriveService.getDeals(
+      settings.start,
+      settings.limit,
+      settings.status
+    );
+    assert.ok(result.length > 0);
   });
 });

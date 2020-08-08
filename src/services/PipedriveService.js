@@ -37,20 +37,23 @@ class PipedriveService {
   //     page++;
   //   }
   // }
-  // async getDeals(page = 0, limit = 0, status) {
-  //   const {
-  //     data,
-  //     additional_data: { more_itens_in_collection },
-  //   } = await axios.get(
-  //     `${process.env.PIPEDRIVE_API_URL}?status=${status}&start=${page}&limit=${limit}&api_token=${process.env.PIPEDRIVE_TOKEN}`
-  //   );
-  //   let promises = [];
-  //   data.forEach((deal) => {
-  //     promises.push(this.insertNewRevenue({ ...deal }));
-  //   });
-  //   result = await Promise.all(promises);
-  //   return { more_itens_in_collection, result };
-  // }
+  async getDeals(page = 0, limit = 0, status) {
+    const { data } = await axios.get(
+      `${process.env.PIPEDRIVE_API_URL}?status=${status}&start=${page}&limit=${limit}&api_token=${process.env.PIPEDRIVE_TOKEN}`
+    );
+    if (data.success && data.data.length > 0) {
+      let promises = [];
+      let result = [];
+      const more_itens_in_collection =
+        data.additional_data.more_itens_in_collection;
+      data.data.forEach((deal) => {
+        promises.push(this.insertNewRevenue({ ...deal }));
+      });
+      result = await Promise.all(promises);
+      return { more_itens_in_collection, result };
+    }
+    return { more_itens_in_collection: false, result };
+  }
 }
 
 module.exports = PipedriveService;
