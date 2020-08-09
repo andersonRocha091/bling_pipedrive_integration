@@ -4,7 +4,7 @@ const xmlBuilder = require("xmlbuilder");
 class BlingService {
   constructor() {}
 
-  createXml(value, type = "U", name) {
+  createXml(value, type = U, name) {
     let revenue = {
       contareceber: {
         valor: value,
@@ -16,8 +16,29 @@ class BlingService {
         },
       },
     };
-    var xml = xmlBuilder.create(revenue).end({ pretty: true });
+    var xml = xmlBuilder.create(revenue).end();
     return xml;
+  }
+
+  sendRergisterRevenueRequest(xml) {
+    return new Promise((resolve, reject) => {
+      const params = new URLSearchParams();
+      params.append("xml", xml);
+      axios({
+        method: "post",
+        url: `${process.env.BLING_API_URL}?apikey=${process.env.BLING_API_TOKEN}`,
+        data: params,
+      })
+        .then((response) => {
+          resolve({ status: response.status, result: response.data });
+        })
+        .catch((error) => {
+          resolve({
+            status: error.response.status,
+            result: error.response.data,
+          });
+        });
+    });
   }
 }
 
