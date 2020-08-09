@@ -24,7 +24,7 @@ class MongoDB extends ICrud {
     const state = STATUS[this._connection.readyState];
     if (state === "Connected") return state;
     if (state !== "Connecting") return state;
-    await new Promise(resolve => setTimeout(resolve, 3000));
+    await new Promise((resolve) => setTimeout(resolve, 3000));
     return STATUS[this._connection.readyState];
   }
 
@@ -35,6 +35,7 @@ class MongoDB extends ICrud {
       {
         useNewUrlParser: true,
         useUnifiedTopology: true,
+        useCreateIndex: true,
       },
       function (error) {
         if (!error) {
@@ -61,6 +62,9 @@ class MongoDB extends ICrud {
 
   delete(id) {
     return this._schema.deleteOne({ _id: id });
+  }
+  deleteMany() {
+    return this._schema.deleteMany({});
   }
 }
 

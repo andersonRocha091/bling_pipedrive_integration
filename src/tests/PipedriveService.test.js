@@ -1,8 +1,10 @@
 const assert = require("assert");
+const mongoose = require("mongoose");
 const MongoDB = require("../db/strategies/mongodb/MongoDB");
 const RevenueSchema = require("../db/strategies/mongodb/schemes/RevenueSchema");
 const Context = require("../db/strategies/base/ContextStrategy");
 const PipedriveService = require("../services/PipedriveService");
+const { isArray } = require("util");
 
 const MOCK_REVENUE_INSERT = {
   value: 314,
@@ -17,8 +19,10 @@ const settings = {
   status: "all_not_deleted",
 };
 
+const mongooseConnection = {};
+
 describe("Testing pipedrive services integration", function () {
-  this.timeout(15000);
+  this.timeout(30000);
   this.beforeAll(async () => {
     const connection = MongoDB.connect();
     context = new Context(new MongoDB(connection, RevenueSchema));
@@ -28,6 +32,11 @@ describe("Testing pipedrive services integration", function () {
       settings.status,
       context
     );
+  });
+
+  this.beforeEach(async () => {
+    context = new Context(new MongoDB(mongoose.connection, RevenueSchema));
+    await context.deleteAll();
   });
 
   it("inserting a revenue into mongo database", async () => {

@@ -23,6 +23,9 @@ class ContextStrategy extends ICrud {
   static connect() {
     return this._database.connect();
   }
+  deleteAll() {
+    return this._database.deleteMany();
+  }
 }
 
 module.exports = ContextStrategy;

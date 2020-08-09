@@ -10,7 +10,7 @@ class PipedriveService {
 
   insertNewRevenue({ id, title, value, update_time, status }) {
     let wonDate = new Date(update_time);
-    // const filter = { pipedriveId: id };
+
     let revenue = {
       pipedriveId: id,
       description: title,
@@ -21,12 +21,16 @@ class PipedriveService {
       day: wonDate.getDate(),
     };
 
-    return this._db.create(revenue);
-    //   // return this.db.findOneAndUpdate(filter, revenue, {
-    //   //   new: true,
-    //   //   upsert: true,
-    //   //   rawResult: true,
-    //   // });
+    return new Promise((resolve, reject) => {
+      this._db
+        .create(revenue)
+        .then((item) => {
+          resolve(item);
+        })
+        .catch((error) => {
+          resolve({});
+        });
+    });
   }
 
   async getDeals(page = 0, limit = 0, status) {
@@ -38,6 +42,7 @@ class PipedriveService {
       let result = [];
       const more_items_in_collection =
         data.additional_data.pagination.more_items_in_collection;
+
       data.data.forEach((deal) => {
         promises.push(this.insertNewRevenue({ ...deal }));
       });
