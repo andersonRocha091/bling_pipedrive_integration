@@ -42,6 +42,7 @@ class PipedriveRoutes extends BaseRoute {
             this.db
           );
           const { results } = await pipedriveService.getAllPipeDriveDeals();
+
           if (results.length > 0) {
             return {
               message: `Deals ${status} inserted successfully`,

@@ -47,6 +47,7 @@ class PipedriveService {
         promises.push(this.insertNewRevenue({ ...deal }));
       });
       result = await Promise.all(promises);
+      result = result.filter((item) => item._id);
       return { more_items_in_collection, result };
     }
     return { more_items_in_collection: false, result };
