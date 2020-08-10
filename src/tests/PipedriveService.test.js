@@ -16,7 +16,7 @@ const MOCK_REVENUE_INSERT = {
 const settings = {
   start: 0,
   limit: 1,
-  status: "all_not_deleted",
+  status: "won",
 };
 
 const mongooseConnection = {};
@@ -84,7 +84,7 @@ describe("Testing pipedrive services integration", function () {
    * It must have more than one item saved into pipedrive account
    */
   it(`Getting all deals per expected number of pages from status: ${settings.status}`, async () => {
-    const expectedPageNumber = 1;
+    const expectedPageNumber = 4;
     const { page } = await pipedriveService.getAllPipeDriveDeals();
     assert.equal(page, expectedPageNumber);
   });
