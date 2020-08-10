@@ -1,7 +1,7 @@
 {
-  "name": "07",
+  "name": "linkapi_challenge",
   "version": "1.0.0",
-  "description": "Multi data sourcing is an scaffolding project which aims to provide an initial setup to built applications which gonna consume data from mongo and SQL databases",
+  "description": "Api integration between pipedrive and bling",
   "main": "index.js",
   "scripts": {
     "preinstall": "npm i -g pm2",
