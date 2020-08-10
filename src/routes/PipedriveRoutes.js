@@ -9,11 +9,6 @@ const failAction = (request, headers, erro) => {
   throw erro;
 };
 
-// const headers = joi
-//   .object({
-//     authorization: joi.string().required(),
-//   })
-//   .unknown();
 class PipedriveRoutes extends BaseRoute {
   constructor(db) {
     super();
@@ -29,7 +24,7 @@ class PipedriveRoutes extends BaseRoute {
           payload: joi.object({
             start: joi.number().integer().default(0),
             limit: joi.number().integer().default(10),
-            status: joi.string().default("all_not_deleted"),
+            status: joi.string().default("won"),
           }),
         },
       },
@@ -44,7 +39,7 @@ class PipedriveRoutes extends BaseRoute {
             this.db
           );
           const { results } = await pipedriveService.getAllPipeDriveDeals();
-          let promises = [];
+
           if (results.length > 0) {
             results.forEach(async (item) => {
               let xml = blingService.createXml(

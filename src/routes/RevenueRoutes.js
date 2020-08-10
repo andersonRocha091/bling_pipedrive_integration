@@ -44,15 +44,33 @@ class RevenueRoutes extends BaseRoute {
         validate: {
           failAction,
           payload: joi.object({
-            success: joi.boolean().equal(true),
-            data: joi.array(),
+            value: joi.number().min(1).required(),
+            pipedriveId: joi.number().min(1).required(),
+            day: joi.number().min(1).max(31).required(),
+            month: joi.number().min(1).max(12).required(),
+            description: joi.string().required(),
+            year: joi.number().min(1900).required(),
           }),
         },
       },
       handler: async (request) => {
         try {
-          const { data } = request.payload;
-          return this.db.create(data);
+          const {
+            value,
+            pipedriveId,
+            day,
+            year,
+            month,
+            description,
+          } = request.payload;
+          const result = await this.db.create({
+            value,
+            pipedriveId,
+            day,
+            year,
+            month,
+            description,
+          });
           return {
             message: "Revenue inserted successfully",
             _id: result._id,
@@ -78,7 +96,6 @@ class RevenueRoutes extends BaseRoute {
             nome: joi.string().min(3).max(100),
             poder: joi.string().min(2).max(100),
           }),
-          headers,
         },
       },
       handler: async (request) => {
@@ -111,7 +128,6 @@ class RevenueRoutes extends BaseRoute {
           params: joi.object({
             id: joi.string().required(),
           }),
-          headers,
         },
       },
       handler: async (request) => {
