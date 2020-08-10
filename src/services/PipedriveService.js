@@ -14,6 +14,7 @@ class PipedriveService {
     let revenue = {
       pipedriveId: id,
       description: title,
+      blingId: "",
       value,
       status,
       year: wonDate.getFullYear(),

@@ -3,6 +3,7 @@ const boom = require("boom");
 
 const BaseRoute = require("./base/BaseRoute");
 const PipedriveService = require("../services/PipedriveService");
+const BlingService = require("../services/BlingService");
 
 const failAction = (request, headers, erro) => {
   throw erro;
@@ -35,6 +36,7 @@ class PipedriveRoutes extends BaseRoute {
       handler: async (request) => {
         try {
           const { status, start, limit } = request.payload;
+          const blingService = new BlingService();
           const pipedriveService = new PipedriveService(
             start,
             limit,
@@ -42,8 +44,23 @@ class PipedriveRoutes extends BaseRoute {
             this.db
           );
           const { results } = await pipedriveService.getAllPipeDriveDeals();
-
+          let promises = [];
           if (results.length > 0) {
+            results.forEach(async (item) => {
+              let xml = blingService.createXml(
+                item.value,
+                "U",
+                item.description
+              );
+              const { result } = await blingService.sendRergisterRevenueRequest(
+                xml
+              );
+              if (result.retorno.contasreceber) {
+                await this.db.update(item.id, {
+                  blingId: result.retorno.contasreceber[0].contaReceber.id,
+                });
+              }
+            });
             return {
               message: `Deals ${status} inserted successfully`,
               results,

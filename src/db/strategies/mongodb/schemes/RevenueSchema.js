@@ -25,6 +25,9 @@ const revenueSchema = new Mongoose.Schema({
     type: String,
     required: true,
   },
+  blingId: {
+    type: String,
+  },
   insertedAt: {
     type: Date,
     default: new Date(),
