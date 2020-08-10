@@ -59,12 +59,33 @@ class MongoDB extends ICrud {
   update(id, item) {
     return this._schema.updateOne({ _id: id }, { $set: item });
   }
-
   delete(id) {
     return this._schema.deleteOne({ _id: id });
   }
   deleteMany() {
     return this._schema.deleteMany({});
+  }
+  sum(year, month, day) {
+    const groupObj = {};
+    if (year) {
+      groupObj["year"] = "$year";
+      if (month) {
+        groupObj["month"] = "$month";
+        if (day) {
+          groupObj["day"] = "$day";
+        }
+      }
+    }
+    return this._schema.aggregate([
+      {
+        $group: {
+          _id: groupObj,
+          total: {
+            $sum: "$value",
+          },
+        },
+      },
+    ]);
   }
 }
 

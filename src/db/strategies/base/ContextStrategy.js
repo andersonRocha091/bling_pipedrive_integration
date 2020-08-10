@@ -26,6 +26,9 @@ class ContextStrategy extends ICrud {
   deleteAll() {
     return this._database.deleteMany();
   }
+  sum(year, month, day) {
+    return this._database.sum(year, month, day);
+  }
 }
 
 module.exports = ContextStrategy;

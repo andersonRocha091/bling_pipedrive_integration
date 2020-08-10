@@ -6,11 +6,6 @@ const failAction = (request, headers, erro) => {
   throw erro;
 };
 
-const headers = joi
-  .object({
-    authorization: joi.string().required(),
-  })
-  .unknown();
 class RevenueRoutes extends BaseRoute {
   constructor(db) {
     super();
@@ -52,20 +47,12 @@ class RevenueRoutes extends BaseRoute {
             success: joi.boolean().equal(true),
             data: joi.array(),
           }),
-          // headers,
         },
       },
       handler: async (request) => {
         try {
           const { data } = request.payload;
-          console.log(data);
-          // const result = await this.db.create({
-          //   value,
-          //   description,
-          //   year,
-          //   month,
-          //   day,
-          // });
+          return this.db.create(data);
           return {
             message: "Revenue inserted successfully",
             _id: result._id,
@@ -103,7 +90,7 @@ class RevenueRoutes extends BaseRoute {
 
           const result = await this.db.update(id, dados);
           if (result.nModified !== 1)
-            return boom.preconditionFailed("Cant update hero");
+            return boom.preconditionFailed("Cant update revenue");
           return {
             message: "Revenue updated successfully",
           };
@@ -137,6 +124,35 @@ class RevenueRoutes extends BaseRoute {
 
           return {
             message: "Revenue removed successfully",
+          };
+        } catch (error) {
+          return boom.internal();
+        }
+      },
+    };
+  }
+
+  sum() {
+    return {
+      path: "/revenues/sum",
+      method: "GET",
+      options: {
+        validate: {
+          failAction,
+          query: joi.object({
+            year: joi.boolean(),
+            month: joi.boolean(),
+            day: joi.boolean(),
+          }),
+        },
+      },
+      handler: async (request) => {
+        try {
+          const { year, month, day } = request.query;
+          const result = await this.db.sum(year, month, day);
+
+          return {
+            message: result,
           };
         } catch (error) {
           return boom.internal();
