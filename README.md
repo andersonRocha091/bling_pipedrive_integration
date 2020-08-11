@@ -99,7 +99,8 @@ The API was build using TDD and it is fully covered by unit tests. In order to r
 ## Author
 
 > - **Anderson Souza Rocha** - Full-stack developer - [Github](https://github.com/andersonRocha091) 
-> Got an issue? just let me know: andersonecomp091@gmail.com
+
+> - Got an issue? just let me know: andersonecomp091@gmail.com
 
 
 ## License 
