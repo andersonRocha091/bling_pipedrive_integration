@@ -20,7 +20,7 @@ This project it's an backend API for an Pipedrive and Bling integration. It was 
 > ```
 > 	cd linkapichallenge
 > ```
-> if not already exists create a .env (Settings for mongoDB and mongocliente) file with the following params for your environment:
+> (if not exists already) create a .env (Settings for mongoDB and mongocliente) file, or setup that with the following params for your environment:
 > ```
 >MONGO_HOST=localhost
 >MONGO_PORT=27017
