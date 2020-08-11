@@ -20,25 +20,36 @@ This project it's an backend API for an Pipedrive and Bling integration. It was 
 > ```
 > 	cd linkapichallenge
 > ```
-> Create a .env (Settigns for mongoDB and mongocliente) file with the following params for setting your environment:
+> if nota already exists create a .env (Settigns for mongoDB and mongocliente) file with the following params for setting your environment:
 > ```
-> MONGO_HOST=<mongo host>
-> MONGO_PORT=<mongo port>
-> MONGO_INITDB_DATABASE=<mongo database>
-> MONGO_INITDB_ROOT_USERNAME=<rootunsername>
-> MONGO_INITDB_ROOT_PASSWORD=<rootpassword>
-> DATABASE_USER=<user>
-> DATABASE_PASSWORD=<password>
+>MONGO_HOST=localhost
+>MONGO_PORT=27017
+>MONGO_INITDB_DATABASE=revenues
+>MONGO_INITDB_ROOT_USERNAME=<your_root_user>
+>MONGO_INITDB_ROOT_PASSWORD=<your_root_user_password>
+>DATABASE_USER=<mongo_database_user>
+>DATABASE_PASSWORD=<mongo_database_password>
 > ```
-> Inside the aplication folder src/config, change the params in .env.dev, and .env.prod :
+> Inside the aplication folder src/config, change the params:
 > ```
-> 
-> PORT=<aplication port>
-> MONGODB_URL=mongodb://<user>:<password>@<host adress | localhost(dev)>:27017/revenues
-> PIPEDRIVE_TOKEN=<pipedrive token>
-> PIPEDRIVE_API_URL=https://api.pipedrive.com/v1/deals
-> BLING_API_TOKEN=<bling api token>
-> BLING_API_URL=https://bling.com.br/Api/v2/pedido/json/
+> in .env.dev
+>PORT=5000
+>MONGODB_URL=mongodb://<DATABASE_USER>:<DATABASE_PASSWORD>@mongo:27017/revenues
+>PIPEDRIVE_TOKEN=<you_pipedrive_token>
+>PIPEDRIVE_API_URL=https://api.pipedrive.com/v1/deals
+>BLING_API_TOKEN=<your_bling_api_key>
+>BLING_API_URL=https://bling.com.br/Api/v2/pedido/json/
+>
+>in .env.prod - (make sure you whitelisted all ips using 0.0.0.0/0 in network access on your
+> atlasDb account, and you also have already an revenues database created before running the app).
+>
+>PORT=5000
+>MONGODB_URL=mongodb+srv://<DATABASE_USER>:<DATABASE_PASSWORD>@<your_cluster_address>/revenues?retryWrites=true&w=majority
+>PIPEDRIVE_TOKEN=<you_pipedrive_token>
+>PIPEDRIVE_API_URL=https://api.pipedrive.com/v1/deals
+>BLING_API_TOKEN=<your_bling_api_key>
+>BLING_API_URL=https://bling.com.br/Api/v2/pedido/json/
+
 > ```
 >
 > In terminal, inside likapichallenge start the local infrastructure:
