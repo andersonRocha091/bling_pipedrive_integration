@@ -66,7 +66,7 @@ This project it's an backend API for an Pipedrive and Bling integration. It was 
 
 ### Deals related
 
-* [Transfer deals from pipedrive to bling](user/get.md) : `POST /deals/`
+* [Transfer deals from pipedrive to bling](deal/get.md) : `POST /deals/`
 
 ### Revenues related
 
