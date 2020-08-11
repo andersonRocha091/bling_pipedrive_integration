@@ -9,7 +9,7 @@
     "test": "nyc --reporter=html mocha --timeout 20000 --exit src/tests/*.js",
     "test:watch": "nyc mocha src/tests/*.js -w",
     "test:prod": "cross-env NODE_ENV=prod npm t",
-    "prod": "cross-env NODE_ENV=prod pm2-runtime src/Api.js",
+    "prod": "cross-env NODE_ENV=prod node src/Api.js",
     "dev": "cross-env NODE_ENV=dev pm2-runtime src/Api.js"
   },
   "repository": {
@@ -41,6 +41,7 @@
     "pg-hstore": "^2.3.3",
     "pm2": "^4.4.0",
     "sequelize": "^5.21.10",
+    "uuid": "^8.3.0",
     "xmlbuilder": "^15.1.1"
   },
   "devDependencies": {

@@ -7,17 +7,6 @@ const Context = require("../db/strategies/base/ContextStrategy");
 
 let app = {};
 
-// const MOCK_HERO_INITIAL = {
-//   nome: "Gavião arqueiro",
-//   poder: "mira",
-// };
-// const TOKEN =
-//   "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6IkxleEx1dGhvciIsImlkIjoxLCJpYXQiOjE1OTEzMTgxNDR9.10qS7Bt-tt0KR3aogMPdoAGl_dd-3KPuR0TA0DyvqY8";
-// let MOCK_ID = "";
-// const headers = {
-//   Authorization: TOKEN,
-// };
-
 describe("Api Test Suit", function () {
   this.beforeAll(async () => {
     app = await api;

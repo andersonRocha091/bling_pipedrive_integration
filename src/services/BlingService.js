@@ -4,15 +4,17 @@ const xmlBuilder = require("xmlbuilder");
 class BlingService {
   constructor() {}
 
-  createXml(value, type = "U", name) {
+  createXml(value, name, codigo) {
     let revenue = {
-      contareceber: {
-        valor: value,
-        ocorrencia: {
-          ocorrenciaTipo: type,
-        },
+      pedido: {
         cliente: {
           nome: name.length > 120 ? name.substring(0, 119) : name,
+        },
+        itens: {
+          item: {
+            codigo: codigo,
+            vlr_unit: value,
+          },
         },
       },
     };

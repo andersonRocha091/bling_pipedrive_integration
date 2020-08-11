@@ -44,15 +44,15 @@ class PipedriveRoutes extends BaseRoute {
             results.forEach(async (item) => {
               let xml = blingService.createXml(
                 item.value,
-                "U",
-                item.description
+                item.description,
+                item.pipedriveId
               );
               const { result } = await blingService.sendRergisterRevenueRequest(
                 xml
               );
-              if (result.retorno.contasreceber) {
+              if (result.retorno.pedidos) {
                 await this.db.update(item.id, {
-                  blingId: result.retorno.contasreceber[0].contaReceber.id,
+                  blingId: result.retorno.pedidos[0].idPedido,
                 });
               }
             });
@@ -62,7 +62,7 @@ class PipedriveRoutes extends BaseRoute {
             };
           } else {
             return {
-              message: `There was not deals with status: ${status}`,
+              message: `Sorry! but there were not deals with status: ${status} anymore`,
               results,
             };
           }
