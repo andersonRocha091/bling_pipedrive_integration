@@ -6,7 +6,7 @@ services:
       context: ./
       dockerfile: Dockerfile
     environment:
-            - "node_env=prod"
+            - "node_env=dev"
     depends_on:
         - mongo
         - mongoClient

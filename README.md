@@ -20,7 +20,7 @@ This project it's an backend API for an Pipedrive and Bling integration. It was 
 > ```
 > 	cd linkapichallenge
 > ```
-> if not already exists create a .env (Settings for mongoDB and mongocliente) file with the following params for setting your environment:
+> if not already exists create a .env (Settings for mongoDB and mongocliente) file with the following params for your environment:
 > ```
 >MONGO_HOST=localhost
 >MONGO_PORT=27017
@@ -51,24 +51,26 @@ This project it's an backend API for an Pipedrive and Bling integration. It was 
 >BLING_API_URL=https://bling.com.br/Api/v2/pedido/json/
 
 > ```
->
+
+
+## Execution
+
+> After setting up the .env's files you can run the api in production or in development mode. 
 > In terminal, inside likapichallenge start the local infrastructure:
 > ```
 > docker-compose up -d --build
 >
 > ```
-> Finally, install the dependencies:
+> By default the app will run at dev mode, if you want it to be running in prod, just change
+> the docker-compose.yml file enviroment node_env to dev, and run the previous command again. 
 >```
-> npm i
+>services:
+>   api:
+>       (...)
+>       environment:
+>            - "node_env=dev"
 >```
-
-## Execution
-
-> After setting up the .env's files you can run the api in production or in development mode. 
-> ```
->  npm run (dev|prod)
-> ```
-> you would be able to access the aplication endpoints by accessing localhost:port/route
+> you would be able to access the aplication endpoints by accessing localhost:5000/route
 >
 > OBS: There's also a mongoClient available for local mongodb management by default set in localhost:3000. (Feel free to use compass, or anything else which better suit for you)
 
