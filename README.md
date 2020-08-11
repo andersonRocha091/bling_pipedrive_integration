@@ -1,6 +1,6 @@
 # Link api challenge
 
-This project it's an backend API for an Pipedrive and Bling integration. It was built in NodeJS 12.8, and it comes with Hapi.js, base unit test, pm2 monitoring, and the all infra-structure already dockerized for local tests.
+This project it's an backend API for an Pipedrive and Bling integration. It was built in NodeJS 12.8, and it comes with Hapi.js, base unit test, pm2 monitoring, and the all infra-structure already dockerized.
 
 ## Pre-requirements
 
@@ -20,7 +20,7 @@ This project it's an backend API for an Pipedrive and Bling integration. It was 
 > ```
 > 	cd linkapichallenge
 > ```
-> if nota already exists create a .env (Settings for mongoDB and mongocliente) file with the following params for setting your environment:
+> if not already exists create a .env (Settings for mongoDB and mongocliente) file with the following params for setting your environment:
 > ```
 >MONGO_HOST=localhost
 >MONGO_PORT=27017
