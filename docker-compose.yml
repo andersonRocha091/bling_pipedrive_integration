@@ -1,6 +1,18 @@
 version: "3.4"
 
 services:
+  api:
+    build:
+      context: ./
+      dockerfile: Dockerfile
+    environment:
+            - "node_env=prod"
+    depends_on:
+        - mongo
+        - mongoClient
+    ports:
+        - "5000:5000"
+
   mongo:
     image: mongo
     restart: always

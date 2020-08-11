@@ -24,11 +24,12 @@ class RevenueRoutes extends BaseRoute {
           }),
         },
       },
-      handler: (request, headers) => {
+      handler: async (request, headers) => {
         try {
           const { skip, limit, name } = request.query;
           const query = { nome: { $regex: `.*${name}*.` } };
-          return this.db.read(name ? query : {}, skip, limit);
+          const result = await this.db.read(name ? query : {}, skip, limit);
+          return result;
         } catch (error) {
           return boom.internal();
         }

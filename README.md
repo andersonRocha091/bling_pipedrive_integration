@@ -29,7 +29,6 @@ This project it's an backend API for an Pipedrive and Bling integration. It was 
 > MONGO_INITDB_ROOT_PASSWORD=<rootpassword>
 > DATABASE_USER=<user>
 > DATABASE_PASSWORD=<password>
-> DATABASE_NAME=<databasename>
 > ```
 > Inside the aplication folder src/config, change the params in .env.dev, and .env.prod :
 > ```
