@@ -74,7 +74,7 @@ This project it's an backend API for an Pipedrive and Bling integration. It was 
 * [Create a Revenue](revenues/post.md) : `POST /revenues/`
 * [Update a Revenue](revenues/patch.md) : `PATCH /revenues/:id/`
 * [Delete a Revenue](revenues/id/delete.md) : `DELETE /api/accounts/:pk/`
-* [Consolidate Total](revenues/sum/sum.md) :`GET revenues/sum`
+* [Consolidate Total](revenues/sum.md) :`GET revenues/sum`
 
 
 ## Testing
