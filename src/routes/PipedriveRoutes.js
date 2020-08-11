@@ -52,7 +52,7 @@ class PipedriveRoutes extends BaseRoute {
               );
               if (result.retorno.pedidos) {
                 await this.db.update(item.id, {
-                  blingId: result.retorno.pedidos[0].idPedido,
+                  blingId: result.retorno.pedidos[0].pedido.idPedido,
                 });
               }
             });
