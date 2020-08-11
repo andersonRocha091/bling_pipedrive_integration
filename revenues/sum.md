@@ -12,9 +12,6 @@ allow to group the total per year, month, and day.
 
 ## Success Responses
 
-**Condition** : Update can be performed either fully or partially by the Owner
-of the Account.
-
 **Code** : `200`
 
 ## If none param was passed:
