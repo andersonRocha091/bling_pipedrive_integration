@@ -64,13 +64,18 @@ This project it's an backend API for an Pipedrive and Bling integration. It was 
 
 ## Endpoints
 
-> Available endpoints:
-> - POST / - header{Authorization:<receivedToken>} body:{name:<heroName>, power:<heroPower>} (insert new hero at mongo's database)
-> - GET /heroes -  header{Authorization:<receivedToken>} (retrieves all heroes)
-> - GET /heroes?skip=<desiredSkip>&limit=<desiredLimit> header{Authorization:<receivedToken>} (heroes with pagination)
-> - GET /heroes?skip=<desiredSkip>&limit=<desiredLimit>&name=<Hero Name> header{Authorization:<receivedToken>} (heroes by name)
-> - PATCH /heroes/:id header{Authorization:<receivedToken>} body:{field1:value1, field2:value2, ...} (Update a hero property)
-> - DELETE /heroes/:id header{Authorization:<receivedToken>} (delete a hero)
+### Deals related
+
+* [Transfer deals from pipedrive to bling](user/get.md) : `POST /deals/`
+
+### Revenues related
+
+* [Show All Revenues](revenues/get.md) : `GET /revenues/`
+* [Create Revenue](revenues/post.md) : `POST /revenues/`
+* [Update An Revenue](revenues/id/patch.md) : `PATCH /revenues/:id/`
+* [Delete An Revenue](revenues/id/delete.md) : `DELETE /api/accounts/:pk/`
+* [Consolidate Total](revenues/sum/sum.md) :`GET revenues/sum`
+
 
 ## Testing
 
