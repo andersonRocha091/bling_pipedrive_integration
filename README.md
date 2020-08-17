@@ -14,11 +14,11 @@ This project it's an backend API for an Pipedrive and Bling integration. It was 
 
 > Clone this project in you machine using the command below:
 > ```
-> 	git clone https://github.com/andersonRocha091/likapichallenge.git
+> 	git clone https://github.com/andersonRocha091/bling_pipedrive_integration.git
 > ```
 > Go to the project folder at your terminal:
 > ```
-> 	cd linkapichallenge
+> 	cd bling_pipedrive_integration 
 > ```
 > (if not exists already) create a .env (Settings for mongoDB and mongocliente) file, or setup that with the following params for your environment:
 > ```
