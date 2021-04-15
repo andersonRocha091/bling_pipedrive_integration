@@ -33,7 +33,7 @@
     "dotenv": "^8.2.0",
     "mongoose": "^5.9.16",
     "pm2": "^4.4.0",
-    "uuid": "^8.3.0",
+    "uuid": "^8.3.2",
     "xmlbuilder": "^15.1.1"
   },
   "devDependencies": {
